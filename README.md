@@ -1,9 +1,9 @@
 # Sugar Home
-This repository provides smart home service framework over [MQTT](http://mqtt.org). MQTT is one of best IoT framework and there are lots of MQTT brokers. It's simple and easy as shown in the below.
+This repository provides smart home service framework over [MQTT](http://mqtt.org). MQTT is simple and easy as shown in the below. MQTT client publishes topic to MQTT broker. Then, MQTT broker notifies the topic changed to the subscribed MQTT client. It's based on [PubSub architeccture](https://en.wikipedia.org/wiki/Publish-subscribe_pattern).
 
 ![Alt text](http://www.hivemq.com/wp-content/uploads/Screen-Shot-2014-10-22-at-12.21.07.png?raw=true "MQTT Publish/Subscribe Architecture")
 
-However, constructing smart home service, it's too much premitive. Sugar Home will guide how to develop smart home service using MQTT (or CoAP, later). 
+However, constructing smart home service, MQTT is too much primitive. Sugar Home will guide how to develop smart home service using MQTT (or CoAP, later). 
 
 ## Overall Architecture
 
