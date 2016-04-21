@@ -1,9 +1,9 @@
 # Sugar Home
-This repository provides smart home service framework over [MQTT](http://mqtt.org). MQTT is simple and easy as shown in the below. MQTT client publishes topic to MQTT broker. Then, MQTT broker notifies the topic changed to the subscribed MQTT client. It's based on [PubSub architeccture](https://en.wikipedia.org/wiki/Publish-subscribe_pattern).
+This repository provides smart home service framework over [MQTT](http://mqtt.org). MQTT is simple and easy as shown in the below. MQTT client publishes topic to MQTT broker. Then, MQTT broker notifies the topic changed to the subscribed MQTT clients. It's based on [PubSub architeccture](https://en.wikipedia.org/wiki/Publish-subscribe_pattern).
 
 ![Alt text](http://www.hivemq.com/wp-content/uploads/Screen-Shot-2014-10-22-at-12.21.07.png?raw=true "MQTT Publish/Subscribe Architecture")
 
-However, constructing smart home service, MQTT is too much primitive. Sugar Home will guide how to develop smart home service using MQTT (or CoAP, later). 
+However, constructing smart home service, MQTT is too much primitive. Sugar Home will guide how to develop smart home service using MQTT (or CoAP, later), from smart home and device simulation, mobile application and cloud based service (MQTT broker, homebot, etc).
 
 ## Overall Architecture
 
@@ -13,7 +13,7 @@ Mobile and devices are connected to MQTT broker ([iot.eclipse.org:1883](http://i
 
 Dongle can be the Internet broker to device. As shown in the above architecture, instead of device, dongle is connected to MQTT server. Dongle and device are communicating under IoT dongle protocol through UART, which is described in [IoT Dongle Platform](https://github.com/gaiakeeper/iot_dongle_platform). Device can be independent from the Internet service.
 
-As of now, there are not so many devices connected to the Internet for smart home. This repository has smart home and device simulator.
+As of now, there are not so many devices connected to the Internet for smart home. This repository has [smart home and device simulator](simulator). You can easily configure your testing home environment and develop your own service.
 
 ## MQTT Topic Structure
 
