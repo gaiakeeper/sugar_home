@@ -13,6 +13,8 @@ Mobile and devices are connected to MQTT broker ([iot.eclipse.org:1883](http://i
 
 Dongle can be the Internet broker to device. As shown in the above architecture, instead of device, dongle is connected to MQTT server. Dongle and device are communicating under IoT dongle protocol through UART, which is described in [IoT Dongle Platform](https://github.com/gaiakeeper/iot_dongle_platform). Device can be independent from the Internet service.
 
+As of now, there are not so many devices connected to the Internet for smart home. This repository has smart home and device simulator.
+
 ## MQTT Topic Structure
 
 ![Alt text](/document/image/MQTT_topic.jpg?raw=true "MQTT Topic Structure")
