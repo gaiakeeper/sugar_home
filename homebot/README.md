@@ -4,7 +4,7 @@ This repository provides [chatterbot](https://en.wikipedia.org/wiki/Chatterbot) 
 
 ## Telegram Home Bot
 
-![Alt text](/document/image/telegam_homebot.png?raw=true "Telegram Homebot")
+![Alt text](/document/image/telegram_homebot.png?raw=true "Telegram Homebot")
 
 As shown the above, Telegram homebot communicates with Telegram messenger. User can control sugar home devices using Telegram messenger and homebot notifies sugar home changes to user using Telegram messenger.
 
@@ -12,7 +12,7 @@ As shown the above, Telegram homebot communicates with Telegram messenger. User 
 
 You can create your own Telegram Bot. You have only to talk to BotFather using Telegram messenger or [https://telegram.me/botfather](https://telegram.me/botfather). It gives chat-based interface to manage Telegram Bot.
 
-![Alt text](/document/image/creating_new_telegambot.png?raw=true "New Telegram Bot")
+![Alt text](/document/image/creating_new_telegrambot.png?raw=true "New Telegram Bot")
 
 When creating new Telegram Bot, you should remember TOKEN to access your bot as shown the above image. You can access your bot through HTTP-based [Bot API](https://core.telegram.org/bots/api). You can get the detail guideline in [Telegram Bot](https://core.telegram.org/bots).
 
@@ -137,7 +137,7 @@ Simple run "telegram.js" as below.
 $ node telegram.js
 ```
 
-And you can test your telegram client and MQTT client - [MQTT Dashboard](https://play.google.com/store/apps/details?id=com.thn.iotmqttdashboard) for your mobile.
+And you can test how it works using your telegram client and MQTT client - [MQTT Dashboard](https://play.google.com/store/apps/details?id=com.thn.iotmqttdashboard) for your mobile as below.
 
 ![Alt text](/document/image/MQTT_Dashboard.jpg?raw=true "MQTT Dashboard")
 
