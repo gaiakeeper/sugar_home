@@ -37,7 +37,7 @@ is@1.0.2)
 ├── mqtt-connection@2.1.1 (through2@0.6.5, reduplexer@1.1.0)
 └── websocket-stream@3.1.0 (ws@1.1.0, through2@2.0.1, duplexify@3.4.3)
 
-$ npm install node-telegram-
+$ npm install node-telegram-bot
 node-telegram-bot@0.1.9 node_modules\node-telegram-bot
 ├── botanio-node@1.0.2
 ├── q@1.4.1
