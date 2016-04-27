@@ -141,3 +141,6 @@ And you can test how it works using your telegram client and MQTT client - [MQTT
 
 ![Alt text](/document/image/MQTT_Dashboard.jpg?raw=true "MQTT Dashboard")
 
+The below is chat with air conditioner.
+
+![Alt text](/document/image/telegram_talk.jpg?raw=true "Telegram Talk")
