@@ -38,3 +38,8 @@ When user buys new device, user needs to setup it using mobile app as shown in t
 For Wi-Fi connection, device should know Wi-Fi AP information (SSID, PASSWORD). For MQTT connection, device should know MQTT server (HOST, PORT) and Home ID. Mobile needs to provide the required information to device. Device also needs to provide device information (TYPE, ID) to mobile. Based on device information, mobile adds device. User can manage (locate device at room, rename device, etc) the new device in home configuration.
 
 In the development phase, user may add the new device manually.
+
+## Mobile Client and Homebot
+Not only [mobile client](android) [chatterbot](homebot) called Homebot are developing. The below is one example homebot connected to Telegram.
+
+![Alt text](/document/image/telegram_talk.jpg?raw=true "Telegram Talk")
