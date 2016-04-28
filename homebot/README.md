@@ -72,10 +72,10 @@ You can simply connect to your Telegram Bot as below. Here, you should specify T
 
 ```
 var telegram = require('node-telegram-bot');
-var bot = new telegram({
-        token: config.TOKEN
+var snsbot = new telegram({
+        token: config.TELEGRAM_TOKEN
 });
-bot.start();
+snsbot.start();
 ```
 
 ### Handling messages from Sugar Home
@@ -86,8 +86,8 @@ You can handle messages from MQTT broker as below. When getting the air conditio
 client.on('message', function(topic, message){
   switch(topic){
     case HOME_DEVICE + '2':
-      bot.sendMessage({
-          chat_id: config.USER,
+      snsbot.sendMessage({
+          chat_id: config.TELEGRAM_USER,
           text: 'Your air conditioner was turned ' + message.toString() + '.',
         }, function(err, msg){
           console.log(err);
@@ -103,7 +103,7 @@ client.on('message', function(topic, message){
 You can handle messages from Telegram Bot as below. When getting "turn on" message, homebot publishes MQTT topic to request the air conditioner turned on.
 
 ```
-bot.on( 'message', function(message){
+snsbot.on( 'message', function(message){
     console.log(message);
 
     var n = message.text.search(/turn on/i);
@@ -113,17 +113,70 @@ bot.on( 'message', function(message){
 });
 ```
 
+### Connecting AI bot
+
+[Cleverbot](cleverbot.io) provides cloud based general chatterbot. You can connect telegram to Cleverbot. At first, you should install cleverbot.io npm.
+
+```
+$ npm install --save cleverbot.io
+cleverbot.io@1.0.4 node_modules\cleverbot.io
+└── request@2.72.0 (forever-agent@0.6.1, aws-sign2@0.6.0, tunnel-agent@0.4.2,
+ caseless@0.11.0, oauth-sign@0.8.1, is-typedarray@1.0.0, stringstream@0.0.5, iss
+tream@0.1.2, json-stringify-safe@5.0.1, extend@3.0.0, tough-cookie@2.2.2, node-u
+uid@1.4.7, qs@6.1.0, combined-stream@1.0.5, mime-types@2.1.10, form-data@1.0.0-r
+c4, aws4@1.3.2, bl@1.1.2, hawk@3.1.3, http-signature@1.1.1, har-validator@2.0.6)
+```
+
+And you can create the clverbot as below. You should create CLEVERBOT USER and get KEY from [the cleverbot site](http://cleverbot.io/keys).
+```
+var cleverbot = require("cleverbot.io");
+homebot = new cleverbot(config.CLEVERBOT_USER, config.CLEVERBOT_KEY);
+homebot.setNick("homebot");
+homebot.create(function(err, session){
+});
+```
+
+When user sends unknown message such as "hello", you can toss it to cleverbot. The response from cleverbot can be returned to telegram.
+
+```
+snsbot.on("message", function(message) {
+    console.log(message);
+
+    var n;
+    if ((n = message.text.search(/turn on/i)) > -1) {
+        client.publish(HOME_DEVICE + "2/R", "on");
+    }
+    else {
+		homebot.ask(message.text, function(err, response){
+            snsbot.sendMessage({
+                chat_id: config.TELEGRAM_USER,
+                text: response.toString(),
+            }, function(err, msg) {
+                console.log(err);
+                console.log(msg);
+            });
+		});
+    }
+```
+
+The below is an example chat with cleverbot in Telegram.
+
+![Alt text](/document/image/cleverbot_talk.jpg?raw=true "Cleverbot Talk")
+
 ### Configuration
 
 Configuration parameters are segregated into "config.json" that you should create your own. The below is one example.
 
 ```
 {
-	"TOKEN":"212664916:AAEsZR3-v853gyNHSiGMknxpLkEEJOjEzgO",
-	"USER":"181234562",
+	"TELEGRAM_TOKEN":"212664916:AAEsZR3-v853gyNHSiGMknxpLkEEJOjEzgO",
+	"TELEGRAM_USER":"181234562",
 
-	"HOME":"sugar_home",
-	"DEVICE":"air_conditioner"
+	"MQTT_HOME":"sugar_home",
+	"MQTT_DEVICE":"air_conditioner",
+
+	"CLEVERBOT_USER":"Tdnfy2lWy6tdHGTP",
+	"CLEVERBOT_KEY":"CtTTya3pVXE1RN7JAt4xQvHqHUT6UB5V"
 }
 ```
 

@@ -1,8 +1,15 @@
 var config = require("./config.json");
-HOME_DEVICE = "/" + config.HOME + "/" + config.DEVICE + "/";
+
+var cleverbot = require("cleverbot.io");
+homebot = new cleverbot(config.CLEVERBOT_USER, config.CLEVERBOT_KEY);
+homebot.setNick("homebot");
+homebot.create(function(err, session){
+});
 
 var mqtt = require("mqtt");
 var client = mqtt.connect("mqtt://iot.eclipse.org");
+
+HOME_DEVICE = "/" + config.MQTT_HOME + "/" + config.MQTT_DEVICE + "/";
 
 client.on("connect", function() {
     client.subscribe(HOME_DEVICE + "2");
@@ -17,8 +24,8 @@ client.on("message", function(topic, message) {
 
     switch (topic) {
         case HOME_DEVICE + "2":
-            bot.sendMessage({
-                chat_id: config.USER,
+            snsbot.sendMessage({
+                chat_id: config.TELEGRAM_USER,
                 text: "Your air conditioner was turned " + message.toString() + ".",
             }, function(err, msg) {
                 console.log(err);
@@ -26,8 +33,8 @@ client.on("message", function(topic, message) {
             });
             break;
         case HOME_DEVICE + "3":
-            bot.sendMessage({
-                chat_id: config.USER,
+            snsbot.sendMessage({
+                chat_id: config.TELEGRAM_USER,
                 text: "Current temperature is " + message.toString() + " degrees.",
             }, function(err, msg) {
                 console.log(err);
@@ -35,8 +42,8 @@ client.on("message", function(topic, message) {
             });
             break;
         case HOME_DEVICE + "4":
-            bot.sendMessage({
-                chat_id: config.USER,
+            snsbot.sendMessage({
+                chat_id: config.TELEGRAM_USER,
                 text: "Preferred temperature was set to " + message.toString() + " degrees.",
             }, function(err, msg) {
                 console.log(err);
@@ -44,8 +51,8 @@ client.on("message", function(topic, message) {
             });
             break;
         case HOME_DEVICE + "5":
-            bot.sendMessage({
-                chat_id: config.USER,
+            snsbot.sendMessage({
+                chat_id: config.TELEGRAM_USER,
                 text: message.toString(),
             }, function(err, msg) {
                 console.log(err);
@@ -57,33 +64,38 @@ client.on("message", function(topic, message) {
     }
 });
 
-
 var telegram = require("node-telegram-bot");
-var bot = new telegram({
-    token: config.TOKEN
+var snsbot = new telegram({
+    token: config.TELEGRAM_TOKEN
 });
-bot.start();
+snsbot.start();
 
-bot.on("message", function(message) {
+snsbot.on("message", function(message) {
     console.log(message);
 
-    var n = message.text.search(/turn on/i);
-    if (n > -1) {
+    var n;
+    if ((n = message.text.search(/turn on/i)) > -1) {
         client.publish(HOME_DEVICE + "2/R", "on");
     }
-
-    n = message.text.search(/turn off/i);
-    if (n > -1) {
+    else if ((n = message.text.search(/turn off/i)) > -1) {
         client.publish(HOME_DEVICE + "2/R", "off");
     }
-
-    n = message.text.search(/set preferred/i);
-    if (n > -1) {
+    else if ((n = message.text.search(/set preferred/i)) > -1) {
         client.publish(HOME_DEVICE + "4/R", message.text.slice(n + 14));
     }
-
-    n = message.text.search(/ok/i);
-    if (n > -1) {
+	else if ((n = message.text.search(/ok/i)) > -1) {
         client.publish(HOME_DEVICE + "5/R", "on");
     }
+    else {
+		homebot.ask(message.text, function(err, response){
+            snsbot.sendMessage({
+                chat_id: config.TELEGRAM_USER,
+                text: response.toString(),
+            }, function(err, msg) {
+                console.log(err);
+                console.log(msg);
+            });
+		});
+    }
 });
+
