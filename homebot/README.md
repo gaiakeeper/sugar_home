@@ -115,7 +115,7 @@ snsbot.on( 'message', function(message){
 
 ### Connecting AI bot
 
-[Cleverbot](cleverbot.io) provides cloud based general chatterbot. You can connect telegram to Cleverbot. At first, you should install cleverbot.io npm.
+[Cleverbot](http://cleverbot.io) provides cloud based general chatterbot. You can connect telegram to Cleverbot. At first, you should install cleverbot.io npm.
 
 ```
 $ npm install --save cleverbot.io
@@ -127,7 +127,7 @@ uid@1.4.7, qs@6.1.0, combined-stream@1.0.5, mime-types@2.1.10, form-data@1.0.0-r
 c4, aws4@1.3.2, bl@1.1.2, hawk@3.1.3, http-signature@1.1.1, har-validator@2.0.6)
 ```
 
-And you can create the clverbot as below. You should create CLEVERBOT USER and get KEY from [the cleverbot site](http://cleverbot.io/keys).
+And you can create the cleverbot as below. You should create your own USER ID and get KEY from [the cleverbot site](http://cleverbot.io/keys).
 ```
 var cleverbot = require("cleverbot.io");
 homebot = new cleverbot(config.CLEVERBOT_USER, config.CLEVERBOT_KEY);
@@ -161,7 +161,7 @@ snsbot.on("message", function(message) {
 
 The below is an example chat with cleverbot in Telegram.
 
-![Alt text](/document/image/cleverbot_talk.jpg?raw=true "Cleverbot Talk")
+![Alt text](/document/image/cleverbot_talk.png?raw=true "Cleverbot Talk")
 
 ### Configuration
 
