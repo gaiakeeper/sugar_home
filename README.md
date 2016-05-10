@@ -40,6 +40,6 @@ For Wi-Fi connection, device should know Wi-Fi AP information (SSID, PASSWORD). 
 In the development phase, user may add the new device manually.
 
 ## Mobile Client and Homebot
-Not only [mobile client](android) [chatterbot](homebot) called Homebot are developing. The below is one example homebot connected to Telegram.
+Not only [mobile client](android), chatterbot called [Homebot](homebot) are developing. The below is one example homebot connected to Telegram.
 
 ![Alt text](/document/image/telegram_talk.jpg?raw=true "Telegram Talk")
